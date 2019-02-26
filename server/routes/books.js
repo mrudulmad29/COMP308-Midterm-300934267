@@ -56,6 +56,7 @@ bookModel.create(newBook, (err, books) => {
 
 });
 
+
 // GET the Book Details page in order to edit an existing Book
 router.get('/edit/:id', (req, res, next) => {
   let id = req.params.id;
@@ -68,8 +69,10 @@ router.get('/edit/:id', (req, res, next) => {
           // show the edit view
           res.render('books/edit', {
               title: "Edit Book",
-              book: bookObject
-          }); }  });
+              books: bookObject,
+          }); 
+        } 
+      });
 });
 
 // router.get('/edit/:id', (req, res, next) => {
@@ -108,9 +111,18 @@ router.post('/edit/:id', (req, res, next) => {
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
 
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+  let id = req.params.id;
+
+  bookModel.remove({_id: id}, (err) => {
+      if(err) {
+          console.log(err);
+          res.end(err);
+      }
+      else {
+          // refresh the contact list
+          res.redirect('/books');
+      }
+  });
 });
 
 
