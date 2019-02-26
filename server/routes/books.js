@@ -8,6 +8,19 @@ let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
 
+let passport = require('passport');
+
+//let contactController = require('../controllers/contact')
+
+
+function requireAuth(req, res, next) {
+  // check if the user is logged in
+  if(!req.isAuthenticated()) {
+    return res.redirect('/login');
+  }
+  next();
+}
+
 // define the book model
 let bookModel = require('../models/books');
 
