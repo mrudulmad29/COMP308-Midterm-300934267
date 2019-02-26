@@ -1,3 +1,8 @@
+/* File Name: books.js
+Author Name: Mrudul Dubey
+Student Id: 300934267
+Web App Name: My Favourite Books */
+
 // modules required for routing
 let express = require('express');
 let router = express.Router();
@@ -75,14 +80,7 @@ router.get('/edit/:id', (req, res, next) => {
       });
 });
 
-// router.get('/edit/:id', (req, res, next) => {
 
-//   res.render('books/edit', {
-//     title: "Edit a Book",
-//     books: bookModel
-// });
-
-// });
 
 // POST - process the information passed from the details form and update the document
 router.post('/edit/:id', (req, res, next) => {

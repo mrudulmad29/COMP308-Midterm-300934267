@@ -1,3 +1,8 @@
+/* File Name: server.js
+Author Name: Mrudul Dubey
+Student Id: 300934267
+Web App Name: My Favourite Books */
+
 let app = require('./server/app');
 let debug = require('debug')('comp308-w2019-midterm:server');
 let http = require('http');

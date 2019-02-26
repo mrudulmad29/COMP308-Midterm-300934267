@@ -1,3 +1,8 @@
+/* File Name: books.js
+Author Name: Mrudul Dubey
+Student Id: 300934267
+Web App Name: My Favourite Books */
+
 module.exports = {
   //local MongoDB deployment ->
   "URI": "mongodb://localhost/Books"

@@ -1,3 +1,8 @@
+/* File Name: books.js
+Author Name: Mrudul Dubey
+Student Id: 300934267
+Web App Name: My Favourite Books */
+
 /* custom JS goes here */
 
 /* pagination code from http://www.bootply.com/lxa0FF9yhw */
