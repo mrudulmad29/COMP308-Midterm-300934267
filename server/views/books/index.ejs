@@ -7,7 +7,7 @@
           <h3>Favourite Books List </h3>
          
 
-          <a href="books/details" class="btn btn-primary"><i class="fa fa-plus"></i> Add a book</a>
+          <a href="/books/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add a book</a>
 
           <br>
 
@@ -16,7 +16,6 @@
               <thead>
                 <tr>
                   <th>Title</th>
-                  <th class="text-center">Title</th>
                   <th class="text-center">Price</th>
                   <th class="text-center">Author</th>
                   <th class="text-center">Genre</th>
@@ -34,6 +33,7 @@
                   <td class="text-center"><%= books[count].Genre %></td>
 
                   <td class="text-center">
+                    
             <a href="/books/edit/<%= books[count]._id %>" 
               class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a>
           </td>
