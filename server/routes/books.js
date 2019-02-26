@@ -10,8 +10,6 @@ let mongoose = require('mongoose');
 
 let passport = require('passport');
 
-//let contactController = require('../controllers/contact')
-
 
 function requireAuth(req, res, next) {
   // check if the user is logged in
@@ -20,6 +18,115 @@ function requireAuth(req, res, next) {
   }
   next();
 }
+
+/* GET Contact List page - READ Operation */
+router.get('/', requireAuth, (req, res, next) =>{
+  bookModel.find((err, books) => {
+      if(err) {
+          return console.error(err);
+      }
+      else {
+         // console.log(contactList);
+
+          res.render('books/index', {
+              title: 'Book List',
+              books: books,
+              displayName: req.user ? req.user.displayName : ''
+          });
+          
+      }
+  });
+});
+
+/* GET Route for the Add page 
+   this will display the Add page */
+router.get('/add', requireAuth, (req, res, next) => {
+  res.render('books/add', {
+      title: 'Add New Book',
+      displayName: req.user ? req.user.displayName : ''
+  });
+});
+
+/* POST Route for processing the Add page */
+router.post('/add', requireAuth, (req, res, next) => {
+
+  let newBook = bookModel({
+      "firstName": req.body.firstName,
+      "lastName": req.body.lastName,
+      "age": req.body.age
+  });
+
+  bookModel.create(newBook, (err, bookModel) => {
+      if(err) {
+          console.log(err);
+          res.end(err);
+      }
+      else {
+          // refresh the contact list
+          res.redirect('/books');
+      }
+  });
+});
+
+/* GET request - display the Edit page */
+router.get('/edit/:id', requireAuth, (req, res, next) => {
+  let id = req.params.id;
+
+  bookModel.findById(id, (err, bookObject) => {
+      if(err) {
+          console.log(err);
+          res.end(err);
+      }
+      else
+      {
+          // show the edit view
+          res.render('books/edit', {
+              title: 'Edit book',
+              book: bookObject,
+              displayName: req.user ? req.user.displayName : ""
+          });
+      }
+  });
+});
+
+/* POST request - Update the database with data from the Edit Page */
+router.post('/edit/:id', requireAuth, (req, res, next) => {
+  let id = req.params.id;
+
+  let updatedBook = bookModel({
+      "_id": id,
+      "firstName": req.body.firstName,
+      "lastName": req.body.lastName,
+      "age": req.body.age
+  });
+
+  bookModel.update({_id: id}, updatedBook, (err) => {
+      if(err) {
+          console.log(err);
+          res.end(err);
+      }
+      else {
+          // refresh the contact list
+          res.redirect('/books');
+      }
+  })
+});
+
+/* GET request to perform the delete action */
+router.get('/delete/:id', requireAuth, (req, res, next) => {
+  let id = req.params.id;
+
+  bookModel.remove({_id: id}, (err) => {
+      if(err) {
+          console.log(err);
+          res.end(err);
+      }
+      else {
+          // refresh the contact list
+          res.redirect('/books');
+      }
+  });
+});
 
 // define the book model
 let bookModel = require('../models/books');

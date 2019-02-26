@@ -1,36 +1,36 @@
 // modules for the web server
-let createError = require('http-errors');
-let express = require('express');
-let path = require('path');
-let cookieParser = require('cookie-parser');
-let logger = require('morgan');
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 
 // modules for authentication
-let session = require('express-session');
-let passport = require('passport');
-let passportLocal = require('passport-local');
-let localStrategy = passportLocal.Strategy;
-let flash = require('connect-flash'); // displaying errors / login messages
+var session = require('express-session');
+var passport = require('passport');
+var passportLocal = require('passport-local');
+var localStrategy = passportLocal.Strategy;
+var flash = require('connect-flash'); // displaying errors / login messages
 
 
 // database setup
-let mongoose = require('mongoose');
-let DB = require('./db');
+var mongoose = require('mongoose');
+var DB = require('./db');
 
 // point Mongoose to the DB URI
 mongoose.connect(DB.URI);
 
-let mongoDB = mongoose.connection;
+var mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
 mongoDB.once('open', ()=> {
   console.log("Connected to MongoDB...");
 });
 
-let indexRouter = require('../routes/index');
-let contactRouter = require('../routes/contact');
+var indexRouter = require('../routes/index');
+var bookRouter = require('../routes/');
 
 
-let app = express();
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
@@ -61,8 +61,8 @@ app.use('/contact-list', contactRouter);
 // Passport User Configuration
 
 // create a user model
-let UserModel = require('../models/user');
-let User = UserModel.User;
+var UserModel = require('../models/users');
+var User = UserModel.User;
 
 // implement a user strategy
 passport.use(User.createStrategy());
@@ -84,7 +84,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error')
 });
 
 module.exports = app;

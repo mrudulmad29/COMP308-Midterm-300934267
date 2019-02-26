@@ -9,14 +9,7 @@ let userSchema = new mongoose.Schema({
         trim: true,
         required: 'username is required'
     },
-    /* taken out because encrypted password is used instead
-    password: {
-        type: String,
-        default: '',
-        trim: true,
-        required: 'password is required'
-    },
-    */
+   
     email: {
         type: String,
         default: '',
