@@ -1,5 +1,22 @@
 /* Custom CSS goes here */
-body {
-  padding-bottom: 70px;
+
+  body {
+    padding-bottom: 70px;
+    background-color:rgb(187, 90, 114);
+  }
+  
+  h1 {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    
+  }
+  
+  p {
+    color: rgb(0, 0, 0);
+    font-family: verdana;
+    font-size: 20px;
   }
 
+  div{
+    color: rgb(31, 59, 4)
+  }
